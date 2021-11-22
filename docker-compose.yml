@@ -1,0 +1,24 @@
+version: '3.7'
+services: 
+    my-sql-docker-compose:
+        image: mysql:8
+        ports: 
+            - "3306:3306"
+        restart: always
+        environment: 
+            MYSQL_DATABASE: personas
+            MYSQL_ROOT_PASSWORD: root
+            MY_ROOT_HOST: '%'
+    api-rest-personas-docker-compose:
+        image: api-personas
+        ports: 
+            - "8082:8082"
+        restart: always
+        depends_on: 
+            - my-sql-docker-compose
+    front-end-personas-docker-compose:
+        image: front-personas
+        ports: 
+            - "8888:80"
+networks: 
+    red-personas:
